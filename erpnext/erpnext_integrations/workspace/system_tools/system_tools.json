@@ -1,0 +1,139 @@
+{
+  "charts": [],
+  "content": "[{\"id\":\"headNR1\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Outils système</b></span>\",\"col\":12}},{\"id\":\"descNR1\",\"type\":\"html\",\"data\":{\"html\":\"<div class=\\\"alert alert-info\\\" style=\\\"margin-bottom: 20px;\\\">Cette section contient des outils système avancés. Utilisez-les avec précaution.</div>\",\"col\":12}},{\"id\":\"resetSC1\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Réinitialisation des données\",\"col\":4}},{\"id\":\"spacer1\",\"type\":\"spacer\",\"data\":{\"col\":12}},{\"id\":\"toolsHeader\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\"><b>Catégories d'outils</b></span>\",\"col\":12}},{\"id\":\"dataTools\",\"type\":\"card\",\"data\":{\"card_name\":\"Gestion des données\",\"col\":4}},{\"id\":\"systemTools\",\"type\":\"card\",\"data\":{\"card_name\":\"Outils système\",\"col\":4}},{\"id\":\"diagnosticTools\",\"type\":\"card\",\"data\":{\"card_name\":\"Diagnostic\",\"col\":4}}]",
+  "creation": "2023-05-10 16:25:20.000000",
+  "custom_blocks": [],
+  "docstatus": 0,
+  "doctype": "Workspace",
+  "hide_custom": 0,
+  "icon": "tool",
+  "idx": 0,
+  "is_hidden": 0,
+  "label": "Outils système",
+  "links": [
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Réinitialisation des données",
+      "link_count": 0,
+      "link_to": "reset_data",
+      "link_type": "Page",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Gestion des données",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Réinitialisation des données",
+      "link_count": 0,
+      "link_to": "reset_data",
+      "link_type": "Page",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Importation de données",
+      "link_count": 0,
+      "link_to": "Data Import",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Exportation de données",
+      "link_count": 0,
+      "link_to": "Data Export",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Outils système",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Journal des erreurs",
+      "link_count": 0,
+      "link_to": "Error Log",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Journal d'activité",
+      "link_count": 0,
+      "link_to": "Activity Log",
+      "link_type": "DocType",
+      "onboard": 0,
+      "type": "Link"
+    },
+    {
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Diagnostic",
+      "link_count": 0,
+      "onboard": 0,
+      "type": "Card Break"
+    },
+    {
+      "dependencies": "",
+      "hidden": 0,
+      "is_query_report": 0,
+      "label": "Console",
+      "link_count": 0,
+      "link_to": "Console",
+      "link_type": "Page",
+      "onboard": 0,
+      "type": "Link"
+    }
+  ],
+  "modified": "2023-05-10 16:25:20.000000",
+  "module": "ERPNext Integrations",
+  "owner": "Administrator",
+  "parent_page": "",
+  "public": 1,
+  "restrict_to_domain": "",
+  "roles": [
+    {
+      "role": "System Manager"
+    }
+  ],
+  "sequence_id": 39.0,
+  "shortcuts": [
+    {
+      "color": "Grey",
+      "format": "{} Outils",
+      "label": "Réinitialisation des données",
+      "link_to": "reset_data",
+      "stats_filter": "",
+      "type": "Page"
+    }
+  ],
+  "title": "Outils système"
+} 
