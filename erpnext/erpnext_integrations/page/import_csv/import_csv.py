@@ -6,18 +6,45 @@ from frappe.utils import getdate, cstr
 import base64
 import io
 
+# Configuration globale
+ALLOW_WAREHOUSE_CREATION = False  # Mettre à True pour permettre la création de nouveaux entrepôts
+
 def get_warehouse_name(warehouse_name):
     """Obtenir le nom correct de l'entrepôt"""
     if warehouse_name == "All Warehouse":
-        return "All Warehouse - ITU"
+        return "All Warehouses - ITU"
     return warehouse_name
 
 def create_warehouse(warehouse_name):
-    """Récupérer le nom correct de l'entrepôt"""
-    return get_warehouse_name(warehouse_name)
+    """Récupérer ou créer un entrepôt selon la configuration"""
+    warehouse_name = get_warehouse_name(warehouse_name)
+    
+    # Vérifier si l'entrepôt existe
+    if frappe.db.exists("Warehouse", warehouse_name):
+        return warehouse_name
+        
+    # Si l'entrepôt n'existe pas
+    if not ALLOW_WAREHOUSE_CREATION:
+        frappe.throw(_(f"L'entrepôt {warehouse_name} n'existe pas et la création automatique est désactivée"))
+    
+    # Création de l'entrepôt si autorisé
+    try:
+        warehouse = frappe.get_doc({
+            "doctype": "Warehouse",
+            "warehouse_name": warehouse_name.replace(" - ITU", ""),
+            "company": frappe.defaults.get_user_default("Company"),
+            "parent_warehouse": "All Warehouses - ITU"
+        })
+        warehouse.insert(ignore_permissions=True)
+        frappe.logger().info(f"Nouvel entrepôt créé: {warehouse.name}")
+        return warehouse.name
+    except Exception as e:
+        frappe.logger().error(f"Erreur lors de la création de l'entrepôt: {str(e)}")
+        raise
 
 @frappe.whitelist()
 def import_fichier_1(file_content):
+    """Import des données avec gestion des entrepôts selon ALLOW_WAREHOUSE_CREATION"""
     try:
         # Décoder le contenu base64
         decoded_content = base64.b64decode(file_content).decode('utf-8')
@@ -86,12 +113,12 @@ def import_fichier_1(file_content):
                     errors.append(f"Ligne {csv_reader.line_num}: Erreur création item - {str(e)}")
                     continue
                 
-                # Créer ou vérifier le Warehouse
+                # Gérer l'entrepôt selon la configuration
                 try:
                     warehouse_name = create_warehouse(row['target_warehouse'])
-                    frappe.logger().debug(f"Warehouse créé/trouvé: {warehouse_name}")
+                    frappe.logger().debug(f"Entrepôt utilisé: {warehouse_name} (création autorisée: {ALLOW_WAREHOUSE_CREATION})")
                 except Exception as e:
-                    errors.append(f"Ligne {csv_reader.line_num}: Erreur création/vérification entrepôt - {str(e)}")
+                    errors.append(f"Ligne {csv_reader.line_num}: Erreur entrepôt - {str(e)}")
                     continue
                 
                 # Vérifier si le type de Material Request est valide
@@ -134,7 +161,8 @@ def import_fichier_1(file_content):
             "message": message,
             "total_success": success_count,
             "total_errors": len(errors),
-            "created_requests": created_requests
+            "created_requests": created_requests,
+            "warehouse_creation_enabled": ALLOW_WAREHOUSE_CREATION
         }
         
     except Exception as e:
@@ -178,6 +206,10 @@ def create_material_request(row, item_code, warehouse_name):
     try:
         # Obtenir le nom correct de l'entrepôt
         actual_warehouse = get_warehouse_name(warehouse_name)
+        
+        # Vérifier que l'entrepôt existe bien
+        if not frappe.db.exists("Warehouse", actual_warehouse):
+            frappe.throw(_(f"L'entrepôt {actual_warehouse} n'existe pas dans le système"))
         
         material_request = frappe.get_doc({
             "doctype": "Material Request",
