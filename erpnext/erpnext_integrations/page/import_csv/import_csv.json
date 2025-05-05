@@ -1,0 +1,20 @@
+{
+ "content": null,
+ "creation": "2025-05-05 20:23:01.593324",
+ "docstatus": 0,
+ "doctype": "Page",
+ "icon": "download",
+ "idx": 0,
+ "modified": "2025-05-05 20:24:25.562254",
+ "modified_by": "Administrator",
+ "module": "ERPNext Integrations",
+ "name": "import-csv",
+ "owner": "Administrator",
+ "page_name": "import-csv",
+ "roles": [],
+ "script": null,
+ "standard": "Yes",
+ "style": null,
+ "system_page": 1,
+ "title": "Import des donn\u00e9es dans le format csv"
+}
