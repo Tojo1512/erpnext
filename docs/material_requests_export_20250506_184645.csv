@@ -1,0 +1,3 @@
+date,item_name,item_groupe,required_by,quantity,purpose,target_warehouse,ref
+2025-02-05,ciment,consommable,2025-02-06,5.0,Purchase,All Warehouses - ITU,MAT-MR-2025-00027
+2025-02-05,boulon,piece,2025-02-06,13.0,Purchase,All Warehouses - ITU,MAT-MR-2025-00026
